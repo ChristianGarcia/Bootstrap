@@ -9,14 +9,9 @@ import uk.co.origamibits.bootstrap.databinding.ActivityMainBinding
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
-    private val viewModel: MainViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding: ActivityMainBinding =
-            DataBindingUtil.setContentView(this, R.layout.activity_main)
-
-        binding.lifecycleOwner = this
-        binding.viewModel = viewModel
+        setContentView(R.layout.activity_main)
     }
 }
