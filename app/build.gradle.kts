@@ -3,6 +3,7 @@ plugins {
     kotlin("android")
     kotlin("kapt")
     kotlin("android.extensions")
+    id("dagger.hilt.android.plugin")
 }
 
 android {
@@ -67,6 +68,7 @@ dependencies {
     val daggerVersion = "2.30.1"
     val moshiVersion = "1.11.0"
     val glideVersion = "4.11.0"
+    val hiltVersion = "+"
 
     implementation("androidx.core:core-ktx:1.3.2")
     implementation("androidx.appcompat:appcompat:1.2.0")
@@ -82,6 +84,9 @@ dependencies {
     kapt("com.google.dagger:dagger-compiler:$daggerVersion")
     implementation("com.google.dagger:dagger-android:$daggerVersion")
     kapt("com.google.dagger:dagger-android-processor:$daggerVersion")
+
+    implementation ("com.google.dagger:hilt-android:$hiltVersion")
+    kapt("com.google.dagger:hilt-compiler:$hiltVersion")
 
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-moshi:2.9.0")
