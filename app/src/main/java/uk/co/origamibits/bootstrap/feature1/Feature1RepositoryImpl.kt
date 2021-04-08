@@ -21,4 +21,13 @@ class Feature1RepositoryImpl @Inject constructor(
             Timber.d("Thread: ${Thread.currentThread()}")
             (0..20).map { "Item $it" }.map { Feature1Item(value = it) }
         }
+
+    override suspend fun load(id: String): Feature1Item =
+        withContext(workDispatcher) {
+            Feature1Item(
+                id = id,
+                value = "Detail of $id"
+            )
+        }
+
 }

@@ -8,4 +8,6 @@ interface Feature1Repository {
 
     suspend fun loadMany(): List<Feature1Item>
 
+    suspend fun load(id: String): Feature1Item
+
 }

@@ -5,10 +5,16 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import dagger.hilt.android.scopes.FragmentScoped
 import uk.co.origamibits.bootstrap.databinding.ItemItemBinding
 import uk.co.origamibits.bootstrap.feature1.model.Feature1Item
+import javax.inject.Inject
 
-class ItemsAdapter : ListAdapter<Feature1Item, ItemsAdapter.ItemViewHolder>(DiffCallback) {
+@FragmentScoped
+class ItemsAdapter @Inject constructor(
+    private val itemsNavigator: ItemsNavigator
+) :
+    ListAdapter<Feature1Item, ItemsAdapter.ItemViewHolder>(DiffCallback) {
     object DiffCallback : DiffUtil.ItemCallback<Feature1Item>() {
         override fun areItemsTheSame(oldItem: Feature1Item, newItem: Feature1Item): Boolean =
             oldItem.id == newItem.id
@@ -18,17 +24,26 @@ class ItemsAdapter : ListAdapter<Feature1Item, ItemsAdapter.ItemViewHolder>(Diff
 
     }
 
-    class ItemViewHolder(private val binding: ItemItemBinding) :
+    class ItemViewHolder(
+        private val binding: ItemItemBinding,
+        private val itemsNavigator: ItemsNavigator
+    ) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Feature1Item) {
             binding.item = item
+            binding.root.setOnClickListener {
+                itemsNavigator.navigateToItem(item)
+            }
             binding.executePendingBindings()
         }
 
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder =
-        ItemViewHolder(ItemItemBinding.inflate(LayoutInflater.from(parent.context)))
+        ItemViewHolder(
+            binding = ItemItemBinding.inflate(LayoutInflater.from(parent.context), parent, false),
+            itemsNavigator = itemsNavigator
+        )
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         holder.bind(getItem(position))

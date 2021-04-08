@@ -6,8 +6,5 @@ import uk.co.origamibits.bootstrap.feature1.model.Feature1Item
 
 @BindingAdapter(value = ["items"])
 fun items(recyclerView: RecyclerView, items: List<Feature1Item>?) {
-    if (recyclerView.adapter == null) {
-        recyclerView.adapter = ItemsAdapter()
-    }
-    (recyclerView.adapter as ItemsAdapter).submitList(items.orEmpty())
+    (recyclerView.adapter as ItemsAdapter?)?.submitList(items.orEmpty())
 }

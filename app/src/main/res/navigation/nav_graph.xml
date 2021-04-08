@@ -11,5 +11,23 @@
         android:name="uk.co.origamibits.bootstrap.ItemsFragment"
         android:label="fragment_items"
         tools:layout="@layout/fragment_items"
-        />
+        >
+
+        <action
+            android:id="@+id/action_itemsFragment_to_itemFragment"
+            app:destination="@id/itemFragment"
+            />
+
+    </fragment>
+    <fragment
+        android:id="@+id/itemFragment"
+        android:name="uk.co.origamibits.bootstrap.ItemFragment"
+        android:label="item_fragment"
+        tools:layout="@layout/item_fragment"
+        >
+        <argument
+            android:name="item"
+            app:argType="uk.co.origamibits.bootstrap.feature1.model.Feature1Item"
+            />
+    </fragment>
 </navigation>

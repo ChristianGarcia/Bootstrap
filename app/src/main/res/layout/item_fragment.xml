@@ -6,24 +6,23 @@
     <data>
 
         <variable
-            name="item"
-            type="uk.co.origamibits.bootstrap.feature1.model.Feature1Item"
+            name="viewModel"
+            type="uk.co.origamibits.bootstrap.ItemViewModel"
             />
+
     </data>
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?attr/selectableItemBackground"
+        android:layout_height="match_parent"
         android:padding="16dp"
+        tools:context=".ItemFragment"
         >
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:text="@{item.value+ `(`+item.id+`)`}"
+            android:text="@{viewModel.itemDetail.value}"
             tools:text="@tools:sample/lorem/random"
             />
 
